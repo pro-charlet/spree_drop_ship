@@ -6,6 +6,15 @@ module Spree
       user ||= Spree.user_class.new
 
       if user.supplier
+        if defined?(Ckeditor::AttachmentFile) && defined?(Ckeditor::Picture)
+          can :access, :ckeditor
+
+          can :create, Ckeditor::AttachmentFile
+          can [:read, :index, :destroy], Ckeditor::AttachmentFile, supplier_id: user.supplier_id
+
+          can :create, Ckeditor::Picture
+          can [:read, :index, :destroy], Ckeditor::Picture, supplier_id: user.supplier_id
+        end
         can [:admin, :confirm, :deliver, :index, :read, :update], Spree::DropShipOrder, supplier_id: user.supplier_id
         can [:admin, :manage], Spree::Image, viewable: { product: { supplier_id: user.supplier_id } }
         can :create, Spree::Image
@@ -32,16 +41,6 @@ module Spree
 
       if Spree::DropShipConfig[:allow_signup]
         can :create, Spree::Supplier
-      end
-
-      if defined?(Ckeditor::AttachmentFile) && defined?(Ckeditor::Picture)
-        can :access, :ckeditor
-
-        can :create, Ckeditor::AttachmentFile
-        can [:read, :index, :destroy], Ckeditor::AttachmentFile, supplier_id: user.supplier_id
-
-        can :create, Ckeditor::Picture
-        can [:read, :index, :destroy], Ckeditor::Picture, supplier_id: user.supplier_id
       end
 
     end

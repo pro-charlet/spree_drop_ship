@@ -12,6 +12,7 @@ require 'factory_girl'
 FactoryGirl.find_definitions
 require 'ffaker'
 require 'shoulda-matchers'
+require 'spree_editor'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -30,6 +31,7 @@ require 'vcr'
 VCR.configure do |c|
   c.allow_http_connections_when_no_cassette = true
   c.cassette_library_dir = 'tmp/vcr_cassettes'
+  c.hook_into :webmock
   c.ignore_localhost = true
 end
 

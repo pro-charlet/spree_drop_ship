@@ -8,6 +8,34 @@ describe Spree::SupplierAbility do
   let(:ability) { Spree::SupplierAbility.new(user) }
   let(:token) { nil }
 
+  context 'for Ckeditor::AttachmentFile' do
+    let(:resource) { Ckeditor::AttachmentFile }
+
+    context 'requested by another suppliers user' do
+      let(:resource) { Ckeditor::AttachmentFile.new({supplier: create(:supplier)}, without_protection: true) }
+      it_should_behave_like 'create only'
+    end
+
+    context 'requested by suppliers user' do
+      let(:resource) { Ckeditor::AttachmentFile.new({supplier: user.supplier}, without_protection: true) }
+      it_should_behave_like 'access granted'
+    end
+  end
+
+  context 'for Ckeditor::AttachmentFile' do
+    let(:resource) { Ckeditor::Picture}
+
+    context 'requested by another suppliers user' do
+      let(:resource) { Ckeditor::Picture.new({supplier: create(:supplier)}, without_protection: true) }
+      it_should_behave_like 'create only'
+    end
+
+    context 'requested by suppliers user' do
+      let(:resource) { Ckeditor::Picture.new({supplier: user.supplier}, without_protection: true) }
+      it_should_behave_like 'access granted'
+    end
+  end
+
   context 'for Dash' do
     let(:resource) { Spree::Admin::OverviewController }
 

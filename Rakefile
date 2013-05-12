@@ -12,4 +12,5 @@ desc 'Generates a dummy app for testing'
 task :test_app do
   ENV['LIB_NAME'] = 'spree_drop_ship'
   Rake::Task['common:test_app'].invoke 'Spree::User'
+  `bundle exec rails generate ckeditor:install --orm=active_record --backend=paperclip && RAILS_ENV=test bundle exec rake db:migrate`
 end
