@@ -48,7 +48,7 @@ class Spree::Supplier < ActiveRecord::Base
   after_create :create_stock_location
   after_create :send_welcome, if: -> { Spree::DropShipConfig[:send_supplier_email] }
   before_create :set_commission
-  before_create :set_token
+  before_create :set_token, if: -> { !Spree::DropShipConfig[:balanced_api_key].empty? }
 
   #==========================================
   # Instance Methods
