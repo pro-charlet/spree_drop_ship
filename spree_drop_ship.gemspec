@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_drop_ship'
-  s.version     = '2.0.0.beta'
+  s.version     = '2.0.0'
   s.summary     = 'Spree Drop Shipping Extension'
   s.description = 'Adds drop shipping functionality to Spree stores.'
   s.required_ruby_version = '>= 1.9.3'
@@ -17,9 +17,9 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency 'balanced'
-  s.add_dependency 'spree_api',         '~> 2.0.0.beta'
-  s.add_dependency 'spree_backend',     '~> 2.0.0.beta'
-  s.add_dependency 'spree_core',        '~> 2.0.0.beta'
+  s.add_dependency 'spree_api',         '~> 2.0.0'
+  s.add_dependency 'spree_backend',     '~> 2.0.0'
+  s.add_dependency 'spree_core',        '~> 2.0.0'
   s.add_dependency 'spree_gateway'
 
   s.add_development_dependency 'capybara',           '~> 2.1'
