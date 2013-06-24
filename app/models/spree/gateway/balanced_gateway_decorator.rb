@@ -1,4 +1,5 @@
 module Spree
+  unless Spree::DropShipConfig[:balanced_api_key].empty?
   Gateway::BalancedGateway.class_eval do
     def capture(authorization, creditcard, gateway_options)
       Rails.logger.debug 'BALANCEDCAPTURE'
@@ -14,5 +15,6 @@ module Spree
       Rails.logger.debug gateway_options[:on_behalf_of_uri]
       provider.capture((authorization.amount * 100).round, authorization.response_code, gateway_options)
     end
+  end
   end
 end
