@@ -6,7 +6,8 @@ module Spree
       user ||= Spree.user_class.new
 
       if user.supplier?
-        can :manage, :all
+##        can :manage, :all
+        can [:admin, :manage], Spree::Order, drop_ship_orders: { supplier_id: user.supplier_id }
         
         can [:admin, :confirm, :deliver, :index, :read, :update], Spree::DropShipOrder, supplier_id: user.supplier_id
         can [:admin, :manage], Spree::Image, viewable: { product: { supplier_id: user.supplier_id } }
